@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Analytics | AI Automation</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #0b1120;
+            color: white;
+        }
+
+        .navbar {
+            height: 70px;
+            background: #111827;
+            border-bottom: 1px solid #263244;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 50px;
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .logo span {
+            color: #38bdf8;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 22px;
+        }
+
+        .nav-links a {
+            color: #cbd5e1;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .nav-links a:hover {
+            color: #38bdf8;
+        }
+
+        .container {
+            max-width: 1150px;
+            margin: 45px auto;
+            padding: 0 25px;
+        }
+
+        .heading {
+            margin-bottom: 30px;
+        }
+
+        .heading h1 {
+            font-size: 34px;
+            margin-bottom: 8px;
+        }
+
+        .heading p {
+            color: #94a3b8;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 18px;
+            margin-bottom: 25px;
+        }
+
+        .stat {
+            background: #111827;
+            border: 1px solid #263244;
+            padding: 22px;
+            border-radius: 15px;
+        }
+
+        .stat p {
+            color: #94a3b8;
+            margin-bottom: 10px;
+        }
+
+        .stat h2 {
+            font-size: 28px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 20px;
+        }
+
+        .card {
+            background: #111827;
+            border: 1px solid #263244;
+            border-radius: 16px;
+            padding: 25px;
+        }
+
+        .card h2 {
+            font-size: 19px;
+            margin-bottom: 20px;
+        }
+
+        .analytics-chart {
+            height: 280px;
+            display: flex;
+            align-items: flex-end;
+            gap: 20px;
+            border-bottom: 1px solid #334155;
+            padding: 20px;
+        }
+
+        .column {
+            flex: 1;
+            background: #38bdf8;
+            border-radius: 7px 7px 0 0;
+        }
+
+        .metric {
+            margin-bottom: 22px;
+        }
+
+        .metric-top {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            color: #cbd5e1;
+        }
+
+        .progress {
+            height: 8px;
+            background: #1e293b;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress span {
+            display: block;
+            height: 100%;
+            background: #38bdf8;
+        }
+
+        @media (max-width: 800px) {
+
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+
+            .navbar {
+                padding: 0 20px;
+            }
+
+            .nav-links {
+                gap: 8px;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+    <nav class="navbar">
+
+        <div class="logo">
+            AI<span>Automation</span>
+        </div>
+
+        <div class="nav-links">
+
+            <a href="/">Home</a>
+            <a href="/dashboard/">Dashboard</a>
+            <a href="/chatboard/">Chatboard</a>
+            <a href="/leads/">Customers</a>
+            <a href="/automations/">Automations</a>
+            <a href="/analytics/">Analytics</a>
+            <a href="/projects/">Projects</a>
+            <a href="/settings/">Settings</a>
+
+        </div>
+
+    </nav>
+
+
+    <main class="container">
+
+        <div class="heading">
+
+            <h1>Analytics</h1>
+
+            <p>
+                Monitor customers, leads, AI tasks and automation performance.
+            </p>
+
+        </div>
+
+
+        <div class="stats">
+
+            <div class="stat">
+                <p>Total Customers</p>
+                <h2>128</h2>
+            </div>
+
+            <div class="stat">
+                <p>Conversion Rate</p>
+                <h2>72%</h2>
+            </div>
+
+            <div class="stat">
+                <p>AI Tasks</p>
+                <h2>57</h2>
+            </div>
+
+            <div class="stat">
+                <p>Automation Runs</p>
+                <h2>1,284</h2>
+            </div>
+
+        </div>
+
+
+        <div class="grid">
+
+            <div class="card">
+
+                <h2>Customer Growth</h2>
+
+                <div class="analytics-chart">
+
+                    <div class="column" style="height: 35%;"></div>
+                    <div class="column" style="height: 50%;"></div>
+                    <div class="column" style="height: 42%;"></div>
+                    <div class="column" style="height: 65%;"></div>
+                    <div class="column" style="height: 58%;"></div>
+                    <div class="column" style="height: 82%;"></div>
+                    <div class="column" style="height: 94%;"></div>
+
+                </div>
+
+            </div>
+
+
+            <div class="card">
+
+                <h2>Performance</h2>
+
+
+                <div class="metric">
+
+                    <div class="metric-top">
+                        <span>Automation Success</span>
+                        <span>96%</span>
+                    </div>
+
+                    <div class="progress">
+                        <span style="width: 96%;"></span>
+                    </div>
+
+                </div>
+
+
+                <div class="metric">
+
+                    <div class="metric-top">
+                        <span>Lead Conversion</span>
+                        <span>72%</span>
+                    </div>
+
+                    <div class="progress">
+                        <span style="width: 72%;"></span>
+                    </div>
+
+                </div>
+
+
+                <div class="metric">
+
+                    <div class="metric-top">
+                        <span>AI Task Completion</span>
+                        <span>89%</span>
+                    </div>
+
+                    <div class="progress">
+                        <span style="width: 89%;"></span>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </main>
+
+</body>
+</html>

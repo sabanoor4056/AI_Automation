@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Settings | AI Automation</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #0b1120;
+            color: white;
+            transition: 0.3s ease;
+        }
+
+        body.light-mode {
+            background: #f5f7fb;
+            color: #0f172a;
+        }
+
+        .navbar {
+            height: 70px;
+            background: #111827;
+            border-bottom: 1px solid #263244;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 50px;
+            transition: 0.3s ease;
+        }
+
+        body.light-mode .navbar {
+            background: white;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .logo span {
+            color: #38bdf8;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 22px;
+        }
+
+        .nav-links a {
+            color: #cbd5e1;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        body.light-mode .nav-links a {
+            color: #475569;
+        }
+
+        .nav-links a:hover {
+            color: #38bdf8;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 50px auto;
+            padding: 0 25px;
+        }
+
+        .heading {
+            margin-bottom: 30px;
+        }
+
+        .heading h1 {
+            font-size: 34px;
+            margin-bottom: 8px;
+        }
+
+        .heading p {
+            color: #94a3b8;
+        }
+
+        body.light-mode .heading p {
+            color: #64748b;
+        }
+
+        .settings-card {
+            background: #111827;
+            border: 1px solid #263244;
+            border-radius: 16px;
+            padding: 25px;
+            margin-bottom: 20px;
+            transition: 0.3s ease;
+        }
+
+        body.light-mode .settings-card {
+            background: white;
+            border-color: #e2e8f0;
+            box-shadow: 0 8px 25px rgba(15, 23, 42, 0.06);
+        }
+
+        .settings-card h2 {
+            font-size: 19px;
+            margin-bottom: 20px;
+        }
+
+        .field {
+            margin-bottom: 18px;
+        }
+
+        .field label {
+            display: block;
+            color: #cbd5e1;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        body.light-mode .field label {
+            color: #334155;
+        }
+
+        .field input,
+        .field select {
+            width: 100%;
+            padding: 13px;
+            background: #0f172a;
+            color: white;
+            border: 1px solid #334155;
+            border-radius: 9px;
+            outline: none;
+            transition: 0.2s;
+        }
+
+        body.light-mode .field input,
+        body.light-mode .field select {
+            background: #f8fafc;
+            color: #0f172a;
+            border-color: #cbd5e1;
+        }
+
+        .field input:focus,
+        .field select:focus {
+            border-color: #38bdf8;
+        }
+
+        .save-btn {
+            background: #38bdf8;
+            color: #06111f;
+            border: none;
+            padding: 12px 22px;
+            border-radius: 9px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .save-btn:hover {
+            background: #0ea5e9;
+            transform: translateY(-1px);
+        }
+
+        .success-message {
+            display: none;
+            margin-top: 15px;
+            padding: 12px 15px;
+            background: #064e3b;
+            color: #a7f3d0;
+            border-radius: 9px;
+            font-size: 14px;
+        }
+
+        .toggle-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid #263244;
+        }
+
+        body.light-mode .toggle-row {
+            border-bottom-color: #e2e8f0;
+        }
+
+        .toggle-row:last-child {
+            border-bottom: none;
+        }
+
+        .toggle-row p {
+            color: #94a3b8;
+            font-size: 13px;
+            margin-top: 5px;
+        }
+
+        .switch {
+            width: 46px;
+            height: 25px;
+            background: #475569;
+            border-radius: 20px;
+            position: relative;
+            cursor: pointer;
+            transition: 0.3s;
+            flex-shrink: 0;
+        }
+
+        .switch::after {
+            content: "";
+            position: absolute;
+            width: 19px;
+            height: 19px;
+            background: white;
+            border-radius: 50%;
+            left: 3px;
+            top: 3px;
+            transition: 0.3s;
+        }
+
+        .switch.active {
+            background: #38bdf8;
+        }
+
+        .switch.active::after {
+            left: 24px;
+        }
+
+        .status-text {
+            font-size: 12px;
+            color: #64748b;
+            margin-top: 5px;
+        }
+
+        @media (max-width: 900px) {
+
+            .navbar {
+                padding: 0 20px;
+            }
+
+            .nav-links {
+                gap: 10px;
+                flex-wrap: wrap;
+            }
+
+        }
+
+        @media (max-width: 700px) {
+
+            .navbar {
+                height: auto;
+                padding: 20px;
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .nav-links {
+                justify-content: center;
+            }
+
+            .container {
+                margin-top: 30px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+<nav class="navbar">
+
+    <div class="logo">
+        AI<span>Automation</span>
+    </div>
+
+    <div class="nav-links">
+
+        <a href="/">Home</a>
+        <a href="/dashboard/">Dashboard</a>
+        <a href="/chatboard/">Chatboard</a>
+        <a href="/leads/">Leads</a>
+        <a href="/automations/">Automations</a>
+        <a href="/analytics/">Analytics</a>
+        <a href="/projects/">Projects</a>
+        <a href="/settings/">Settings</a>
+
+    </div>
+
+</nav>
+
+
+<main class="container">
+
+    <div class="heading">
+
+        <h1>Settings</h1>
+
+        <p>
+            Manage your profile and platform preferences.
+        </p>
+
+    </div>
+
+
+    <!-- PROFILE -->
+
+    <div class="settings-card">
+
+        <h2>Profile Settings</h2>
+
+        <div class="field">
+
+            <label>Full Name</label>
+
+            <input
+                type="text"
+                id="fullName"
+                placeholder="Enter your full name"
+            >
+
+        </div>
+
+
+        <div class="field">
+
+            <label>Email</label>
+
+            <input
+                type="email"
+                id="email"
+                placeholder="Enter your email"
+            >
+
+        </div>
+
+
+        <div class="field">
+
+            <label>Role</label>
+
+            <input
+                type="text"
+                id="role"
+                placeholder="Enter your role"
+            >
+
+        </div>
+
+
+        <button
+            class="save-btn"
+            onclick="saveProfile()"
+        >
+            Save Changes
+        </button>
+
+
+        <div
+            class="success-message"
+            id="successMessage"
+        >
+            ✓ Your profile changes have been saved successfully.
+        </div>
+
+    </div>
+
+
+    <!-- PREFERENCES -->
+
+    <div class="settings-card">
+
+        <h2>Preferences</h2>
+
+
+        <div class="toggle-row">
+
+            <div>
+
+                <strong>AI Notifications</strong>
+
+                <p>
+                    Receive notifications about AI tasks.
+                </p>
+
+            </div>
+
+            <div
+                class="switch"
+                id="aiNotifications"
+                onclick="toggleSetting('aiNotifications')"
+            ></div>
+
+        </div>
+
+
+        <div class="toggle-row">
+
+            <div>
+
+                <strong>Automation Alerts</strong>
+
+                <p>
+                    Get notified when an automation completes.
+                </p>
+
+            </div>
+
+            <div
+                class="switch"
+                id="automationAlerts"
+                onclick="toggleSetting('automationAlerts')"
+            ></div>
+
+        </div>
+
+
+        <div class="toggle-row">
+
+            <div>
+
+                <strong>Activity Updates</strong>
+
+                <p>
+                    Show recent customer and system activity.
+                </p>
+
+            </div>
+
+            <div
+                class="switch"
+                id="activityUpdates"
+                onclick="toggleSetting('activityUpdates')"
+            ></div>
+
+        </div>
+
+    </div>
+
+
+    <!-- PLATFORM -->
+
+    <div class="settings-card">
+
+        <h2>Platform</h2>
+
+
+        <div class="field">
+
+            <label>Theme</label>
+
+            <select
+                id="theme"
+                onchange="changeTheme()"
+            >
+
+                <option value="dark">Dark</option>
+                <option value="light">Light</option>
+
+            </select>
+
+        </div>
+
+
+        <div class="field">
+
+            <label>Language</label>
+
+            <select
+                id="language"
+                onchange="saveLanguage()"
+            >
+
+                <option value="English">English</option>
+                <option value="Urdu">Urdu</option>
+
+            </select>
+
+        </div>
+
+        <div class="status-text" id="themeStatus"></div>
+
+    </div>
+
+
+</main>
+
+
+<script>
+
+    /* =========================
+       LOAD SAVED SETTINGS
+    ========================= */
+
+    document.addEventListener("DOMContentLoaded", function () {
+
+        const savedName =
+            localStorage.getItem("profileName") || "Saba Noor";
+
+        const savedEmail =
+            localStorage.getItem("profileEmail") || "";
+
+        const savedRole =
+            localStorage.getItem("profileRole") ||
+            "AI Automation Developer";
+
+        const savedTheme =
+            localStorage.getItem("theme") || "dark";
+
+        const savedLanguage =
+            localStorage.getItem("language") || "English";
+
+
+        document.getElementById("fullName").value = savedName;
+
+        document.getElementById("email").value = savedEmail;
+
+        document.getElementById("role").value = savedRole;
+
+        document.getElementById("theme").value = savedTheme;
+
+        document.getElementById("language").value = savedLanguage;
+
+
+        applyTheme(savedTheme);
+
+
+        loadToggle("aiNotifications");
+
+        loadToggle("automationAlerts");
+
+        loadToggle("activityUpdates");
+
+    });
+
+
+    /* =========================
+       PROFILE SAVE
+    ========================= */
+
+    function saveProfile() {
+
+        const name =
+            document.getElementById("fullName").value;
+
+        const email =
+            document.getElementById("email").value;
+
+        const role =
+            document.getElementById("role").value;
+
+
+        localStorage.setItem(
+            "profileName",
+            name
+        );
+
+        localStorage.setItem(
+            "profileEmail",
+            email
+        );
+
+        localStorage.setItem(
+            "profileRole",
+            role
+        );
+
+
+        const message =
+            document.getElementById("successMessage");
+
+        message.style.display = "block";
+
+
+        setTimeout(function () {
+
+            message.style.display = "none";
+
+        }, 3000);
+
+    }
+
+
+    /* =========================
+       THEME
+    ========================= */
+
+    function changeTheme() {
+
+        const theme =
+            document.getElementById("theme").value;
+
+        localStorage.setItem(
+            "theme",
+            theme
+        );
+
+        applyTheme(theme);
+
+        document.getElementById("themeStatus").innerText =
+            "Theme saved successfully.";
+
+    }
+
+
+    function applyTheme(theme) {
+
+        if (theme === "light") {
+
+            document.body.classList.add(
+                "light-mode"
+            );
+
+        } else {
+
+            document.body.classList.remove(
+                "light-mode"
+            );
+
+        }
+
+    }
+
+
+    /* =========================
+       TOGGLE SETTINGS
+    ========================= */
+
+    function toggleSetting(settingName) {
+
+        const element =
+            document.getElementById(settingName);
+
+        const currentState =
+            localStorage.getItem(settingName) === "true";
+
+        const newState =
+            !currentState;
+
+
+        localStorage.setItem(
+            settingName,
+            newState
+        );
+
+
+        if (newState) {
+
+            element.classList.add("active");
+
+        } else {
+
+            element.classList.remove("active");
+
+        }
+
+    }
+
+
+    function loadToggle(settingName) {
+
+        const savedState =
+            localStorage.getItem(settingName) === "true";
+
+        const element =
+            document.getElementById(settingName);
+
+
+        if (savedState) {
+
+            element.classList.add("active");
+
+        } else {
+
+            element.classList.remove("active");
+
+        }
+
+    }
+
+
+    /* =========================
+       LANGUAGE
+    ========================= */
+
+    function saveLanguage() {
+
+        const language =
+            document.getElementById("language").value;
+
+        localStorage.setItem(
+            "language",
+            language
+        );
+
+    }
+
+</script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,379 @@
+{% extends "base.html" %}
+
+{% block title %}AI Chatboard - AI Automation{% endblock %}
+
+{% block content %}
+
+<style>
+    .chat-page {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 40px 25px;
+    }
+
+    .chat-header {
+        margin-bottom: 25px;
+    }
+
+    .chat-header .badge {
+        color: #38bdf8;
+        font-size: 12px;
+        font-weight: bold;
+        letter-spacing: 1.5px;
+    }
+
+    .chat-header h1 {
+        font-size: 32px;
+        margin: 8px 0;
+    }
+
+    .chat-header p {
+        color: #94a3b8;
+    }
+
+    .chat-box {
+        background: #111827;
+        border: 1px solid #263244;
+        border-radius: 16px;
+        min-height: 600px;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+    }
+
+    .chat-top {
+        padding: 18px 22px;
+        border-bottom: 1px solid #263244;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .ai-info {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .ai-icon {
+        width: 42px;
+        height: 42px;
+        border-radius: 12px;
+        background: #172033;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 21px;
+    }
+
+    .ai-info h3 {
+        font-size: 15px;
+        margin-bottom: 4px;
+    }
+
+    .online {
+        color: #4ade80;
+        font-size: 12px;
+    }
+
+    .clear-btn {
+        background: transparent;
+        border: 1px solid #334155;
+        color: #94a3b8;
+        padding: 8px 13px;
+        border-radius: 8px;
+        cursor: pointer;
+    }
+
+    .clear-btn:hover {
+        color: #38bdf8;
+        border-color: #38bdf8;
+    }
+
+    .messages {
+        flex: 1;
+        padding: 25px;
+        overflow-y: auto;
+    }
+
+    .message {
+        display: flex;
+        margin-bottom: 20px;
+    }
+
+    .message.ai {
+        justify-content: flex-start;
+    }
+
+    .message.user {
+        justify-content: flex-end;
+    }
+
+    .message-content {
+        max-width: 70%;
+        padding: 13px 16px;
+        border-radius: 13px;
+        line-height: 1.5;
+        font-size: 14px;
+    }
+
+    .message.ai .message-content {
+        background: #172033;
+        color: #dbeafe;
+    }
+
+    .message.user .message-content {
+        background: #0284c7;
+        color: white;
+    }
+
+    .chat-input-area {
+        border-top: 1px solid #263244;
+        padding: 18px;
+    }
+
+    .chat-form {
+        display: flex;
+        gap: 12px;
+    }
+
+    .chat-input {
+        flex: 1;
+        background: #0b1120;
+        border: 1px solid #334155;
+        color: white;
+        padding: 14px 16px;
+        border-radius: 10px;
+        outline: none;
+        font-size: 14px;
+    }
+
+    .chat-input:focus {
+        border-color: #38bdf8;
+    }
+
+    .send-btn {
+        background: #0284c7;
+        color: white;
+        border: none;
+        padding: 0 22px;
+        border-radius: 10px;
+        cursor: pointer;
+        font-weight: bold;
+    }
+
+    .send-btn:hover {
+        background: #0369a1;
+    }
+
+    .suggestions {
+        display: flex;
+        gap: 8px;
+        margin-top: 12px;
+        flex-wrap: wrap;
+    }
+
+    .suggestion {
+        background: #172033;
+        border: 1px solid #263244;
+        color: #94a3b8;
+        padding: 7px 11px;
+        border-radius: 20px;
+        cursor: pointer;
+        font-size: 12px;
+    }
+
+    .suggestion:hover {
+        color: #38bdf8;
+        border-color: #38bdf8;
+    }
+
+    @media (max-width: 700px) {
+        .chat-page {
+            padding: 25px 15px;
+        }
+
+        .chat-box {
+            min-height: 500px;
+        }
+
+        .message-content {
+            max-width: 85%;
+        }
+
+        .chat-form {
+            flex-direction: column;
+        }
+
+        .send-btn {
+            height: 45px;
+        }
+    }
+</style>
+
+<div class="chat-page">
+
+    <div class="chat-header">
+        <div class="badge">AI POWERED ASSISTANT</div>
+
+        <h1>AI Chatboard</h1>
+
+        <p>
+            Ask questions, generate ideas, analyze information and automate tasks with AI.
+        </p>
+    </div>
+
+    <div class="chat-box">
+
+        <div class="chat-top">
+
+            <div class="ai-info">
+
+                <div class="ai-icon">
+                    🤖
+                </div>
+
+                <div>
+                    <h3>AI Automation Assistant</h3>
+                    <div class="online">● Online</div>
+                </div>
+
+            </div>
+
+            <button class="clear-btn" onclick="clearChat()">
+                Clear Chat
+            </button>
+
+        </div>
+
+        <div class="messages" id="messages">
+
+            <div class="message ai">
+
+                <div class="message-content">
+                    Hello Saba! 👋<br><br>
+                    I'm your AI Automation Assistant. How can I help you today?
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="chat-input-area">
+
+            <form class="chat-form" onsubmit="sendMessage(event)">
+
+                <input
+                    type="text"
+                    id="chatInput"
+                    class="chat-input"
+                    placeholder="Type your message..."
+                    autocomplete="off"
+                >
+
+                <button type="submit" class="send-btn">
+                    Send
+                </button>
+
+            </form>
+
+            <div class="suggestions">
+
+                <button class="suggestion"
+                    onclick="quickMessage('How can AI automate my business?')">
+                    AI business automation
+                </button>
+
+                <button class="suggestion"
+                    onclick="quickMessage('How can I generate leads?')">
+                    Generate leads
+                </button>
+
+                <button class="suggestion"
+                    onclick="quickMessage('Give me automation ideas')">
+                    Automation ideas
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+function sendMessage(event) {
+
+    event.preventDefault();
+
+    const input = document.getElementById("chatInput");
+    const message = input.value.trim();
+
+    if (message === "") {
+        return;
+    }
+
+    addMessage(message, "user");
+
+    input.value = "";
+
+    setTimeout(function() {
+
+        addMessage(
+            "Thanks for your message! AI automation can help with lead management, customer support, data processing and repetitive business tasks. 🤖",
+            "ai"
+        );
+
+    }, 600);
+}
+
+
+function addMessage(text, type) {
+
+    const messages = document.getElementById("messages");
+
+    const message = document.createElement("div");
+
+    message.className = "message " + type;
+
+    const content = document.createElement("div");
+
+    content.className = "message-content";
+
+    content.textContent = text;
+
+    message.appendChild(content);
+
+    messages.appendChild(message);
+
+    messages.scrollTop = messages.scrollHeight;
+}
+
+
+function quickMessage(text) {
+
+    document.getElementById("chatInput").value = text;
+
+    document.querySelector(".chat-form").dispatchEvent(
+        new Event("submit", { cancelable: true })
+    );
+}
+
+
+function clearChat() {
+
+    document.getElementById("messages").innerHTML = `
+        <div class="message ai">
+            <div class="message-content">
+                Hello Saba! 👋<br><br>
+                I'm your AI Automation Assistant. How can I help you today?
+            </div>
+        </div>
+    `;
+}
+
+</script>
+
+{% endblock %}

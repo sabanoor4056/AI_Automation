@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+{% block title %}Home - AI Automation{% endblock %}
+
+{% block content %}
+
+<section class="hero">
+
+    <div class="container">
+
+        <div class="hero-content">
+
+            <p class="badge-text">AI POWERED AUTOMATION</p>
+
+            <h1>
+                Automate Your Business
+                With Artificial Intelligence
+            </h1>
+
+            <p class="hero-text">
+                Manage leads, automate customer responses,
+                analyze inquiries and save time with AI.
+            </p>
+
+            <div class="hero-buttons">
+                <a href="{% url 'dashboard' %}" class="btn">
+                    Explore Dashboard
+                </a>
+
+                <a href="{% url 'chatboard' %}" class="btn secondary-btn">
+                    Try AI Chat
+                </a>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<section class="features container">
+
+    <div class="feature-card">
+        <div class="feature-icon">🤖</div>
+        <h3>AI Lead Analysis</h3>
+        <p>
+            Automatically analyze and categorize
+            customer inquiries using AI.
+        </p>
+    </div>
+
+    <div class="feature-card">
+        <div class="feature-icon">💬</div>
+        <h3>Smart Responses</h3>
+        <p>
+            Generate professional customer responses
+            automatically.
+        </p>
+    </div>
+
+    <div class="feature-card">
+        <div class="feature-icon">📊</div>
+        <h3>Business Analytics</h3>
+        <p>
+            Monitor leads, tasks and automation
+            performance from one dashboard.
+        </p>
+    </div>
+
+</section>
+
+{% endblock %}

@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Projects | AI Automation</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #0b1120;
+            color: white;
+        }
+
+        .navbar {
+            height: 70px;
+            background: #111827;
+            border-bottom: 1px solid #263244;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 50px;
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .logo span {
+            color: #38bdf8;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 22px;
+        }
+
+        .nav-links a {
+            color: #cbd5e1;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .nav-links a:hover {
+            color: #38bdf8;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 50px auto;
+            padding: 0 25px;
+        }
+
+        .heading {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .heading h1 {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        .heading p {
+            color: #94a3b8;
+        }
+
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 22px;
+        }
+
+        .project {
+            background: #111827;
+            border: 1px solid #263244;
+            border-radius: 17px;
+            padding: 25px;
+            transition: 0.2s;
+        }
+
+        .project:hover {
+            border-color: #38bdf8;
+            transform: translateY(-3px);
+        }
+
+        .project-icon {
+            width: 50px;
+            height: 50px;
+            background: #172033;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 23px;
+            margin-bottom: 18px;
+        }
+
+        .project h2 {
+            font-size: 21px;
+            margin-bottom: 10px;
+        }
+
+        .project p {
+            color: #94a3b8;
+            line-height: 1.6;
+            font-size: 14px;
+            margin-bottom: 18px;
+        }
+
+        .tags {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            padding: 6px 10px;
+            background: #0f172a;
+            border: 1px solid #334155;
+            border-radius: 20px;
+            font-size: 12px;
+            color: #cbd5e1;
+        }
+
+        .project-btn {
+            display: inline-block;
+            margin-top: 20px;
+            color: #38bdf8;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .project-btn:hover {
+            color: white;
+        }
+
+        @media (max-width: 750px) {
+
+            .navbar {
+                padding: 0 20px;
+            }
+
+            .nav-links {
+                gap: 8px;
+            }
+
+            .project-grid {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+    <nav class="navbar">
+
+        <div class="logo">
+            AI<span>Automation</span>
+        </div>
+
+        <div class="nav-links">
+
+            <a href="/">Home</a>
+            <a href="/dashboard/">Dashboard</a>
+            <a href="/chatboard/">Chatboard</a>
+            <a href="/leads/">Customers</a>
+            <a href="/automations/">Automations</a>
+            <a href="/analytics/">Analytics</a>
+            <a href="/projects/">Projects</a>
+            <a href="/settings/">Settings</a>
+
+        </div>
+
+    </nav>
+
+
+    <main class="container">
+
+        <div class="heading">
+
+            <h1>My Projects</h1>
+
+            <p>
+                AI, automation, software development and intelligent web projects.
+            </p>
+
+        </div>
+
+
+        <div class="project-grid">
+
+
+            <div class="project">
+
+                <div class="project-icon">
+                    🤖
+                </div>
+
+                <h2>LieSense AI</h2>
+
+                <p>
+                    An AI-based multi-cue automated lie detection
+                    system using audio, text and facial behavioural
+                    features to provide probability-based analysis.
+                </p>
+
+                <div class="tags">
+
+                    <span class="tag">Python</span>
+                    <span class="tag">Django</span>
+                    <span class="tag">Machine Learning</span>
+                    <span class="tag">OpenCV</span>
+
+                </div>
+
+                <a href="#" class="project-btn">
+                    View Project →
+                </a>
+
+            </div>
+
+
+            <div class="project">
+
+                <div class="project-icon">
+                    ⚡
+                </div>
+
+                <h2>AI Automation Platform</h2>
+
+                <p>
+                    A Django-based AI automation platform for
+                    customer management, AI assistance and
+                    intelligent workflow management.
+                </p>
+
+                <div class="tags">
+
+                    <span class="tag">Python</span>
+                    <span class="tag">Django</span>
+                    <span class="tag">AI</span>
+                    <span class="tag">Automation</span>
+
+                </div>
+
+                <a href="/dashboard/" class="project-btn">
+                    Open Platform →
+                </a>
+
+            </div>
+
+
+            <div class="project">
+
+                <div class="project-icon">
+                    🩸
+                </div>
+
+                <h2>Blood Donation Management</h2>
+
+                <p>
+                    A web-based blood donation management system
+                    designed to manage donors, recipients and
+                    blood donation records.
+                </p>
+
+                <div class="tags">
+
+                    <span class="tag">Django</span>
+                    <span class="tag">React</span>
+                    <span class="tag">Python</span>
+                    <span class="tag">Database</span>
+
+                </div>
+
+                <a href="#" class="project-btn">
+                    View Project →
+                </a>
+
+            </div>
+
+
+            <div class="project">
+
+                <div class="project-icon">
+                    🎬
+                </div>
+
+                <h2>Movie Ticket Booking</h2>
+
+                <p>
+                    A database-based movie ticket booking system
+                    designed to manage movies, customers,
+                    bookings and ticket information.
+                </p>
+
+                <div class="tags">
+
+                    <span class="tag">SQL</span>
+                    <span class="tag">Database</span>
+                    <span class="tag">OOP</span>
+
+                </div>
+
+                <a href="#" class="project-btn">
+                    View Project →
+                </a>
+
+            </div>
+
+
+        </div>
+
+    </main>
+
+</body>
+</html>

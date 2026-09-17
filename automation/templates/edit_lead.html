@@ -1,0 +1,177 @@
+{% extends "base.html" %}
+
+{% block title %}Edit Lead - AI Automation{% endblock %}
+
+{% block content %}
+
+<div style="max-width:800px;margin:40px auto;padding:25px;">
+
+    <div style="color:#38bdf8;font-size:12px;font-weight:bold;">
+        CUSTOMER MANAGEMENT
+    </div>
+
+    <h1 style="margin:10px 0;">
+        Edit Lead
+    </h1>
+
+    <p style="color:#94a3b8;margin-bottom:30px;">
+        Update the information for {{ lead.name }}.
+    </p>
+
+
+    <div style="
+        background:#111827;
+        border:1px solid #263244;
+        border-radius:16px;
+        padding:30px;
+    ">
+
+        <form method="POST">
+
+            {% csrf_token %}
+
+
+            <div style="margin-bottom:20px;">
+
+                <label>Full Name</label>
+
+                <input
+                    type="text"
+                    name="name"
+                    value="{{ lead.name }}"
+                    required
+                    style="
+                        width:100%;
+                        padding:13px;
+                        margin-top:8px;
+                        background:#0b1120;
+                        color:white;
+                        border:1px solid #334155;
+                        border-radius:9px;
+                    "
+                >
+
+            </div>
+
+
+            <div style="margin-bottom:20px;">
+
+                <label>Email</label>
+
+                <input
+                    type="email"
+                    name="email"
+                    value="{{ lead.email }}"
+                    required
+                    style="
+                        width:100%;
+                        padding:13px;
+                        margin-top:8px;
+                        background:#0b1120;
+                        color:white;
+                        border:1px solid #334155;
+                        border-radius:9px;
+                    "
+                >
+
+            </div>
+
+
+            <div style="margin-bottom:20px;">
+
+                <label>Interest</label>
+
+                <input
+                    type="text"
+                    name="interest"
+                    value="{{ lead.interest }}"
+                    required
+                    style="
+                        width:100%;
+                        padding:13px;
+                        margin-top:8px;
+                        background:#0b1120;
+                        color:white;
+                        border:1px solid #334155;
+                        border-radius:9px;
+                    "
+                >
+
+            </div>
+
+
+            <div style="margin-bottom:20px;">
+
+                <label>Status</label>
+
+                <select
+                    name="status"
+                    style="
+                        width:100%;
+                        padding:13px;
+                        margin-top:8px;
+                        background:#0b1120;
+                        color:white;
+                        border:1px solid #334155;
+                        border-radius:9px;
+                    "
+                >
+
+                    <option value="New"
+                        {% if lead.status == "New" %}selected{% endif %}>
+                        New
+                    </option>
+
+                    <option value="Contacted"
+                        {% if lead.status == "Contacted" %}selected{% endif %}>
+                        Contacted
+                    </option>
+
+                    <option value="Qualified"
+                        {% if lead.status == "Qualified" %}selected{% endif %}>
+                        Qualified
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <button
+                type="submit"
+                style="
+                    background:#0284c7;
+                    color:white;
+                    border:none;
+                    padding:13px 20px;
+                    border-radius:9px;
+                    cursor:pointer;
+                    font-weight:bold;
+                "
+            >
+                Save Changes
+            </button>
+
+
+            <a
+                href="{% url 'leads' %}"
+                style="
+                    display:inline-block;
+                    background:#172033;
+                    color:#cbd5e1;
+                    padding:13px 20px;
+                    border-radius:9px;
+                    text-decoration:none;
+                    margin-left:8px;
+                "
+            >
+                Cancel
+            </a>
+
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,397 @@
+{% extends "base.html" %}
+
+{% block title %}Leads - AI Automation{% endblock %}
+
+{% block content %}
+
+{% if messages %}
+    {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endif %}
+
+<style>
+
+    .alert {
+    padding: 12px 18px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    font-size: 14px;
+    font-weight: 500;
+}
+.alert-success {
+    background: #d1fae5;
+    color: #065f46;
+}
+.alert-error {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+.leads-page {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 25px;
+}
+
+.leads-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 30px;
+    gap: 20px;
+}
+
+.badge {
+    color: #38bdf8;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 1.5px;
+}
+
+.leads-header h1 {
+    font-size: 32px;
+    margin: 8px 0;
+}
+
+.leads-header p {
+    color: #94a3b8;
+}
+
+.add-btn {
+    background: #0284c7;
+    color: white;
+    text-decoration: none;
+    padding: 12px 18px;
+    border-radius: 9px;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+.add-btn:hover {
+    background: #0369a1;
+}
+
+.leads-card {
+    background: #111827;
+    border: 1px solid #263244;
+    border-radius: 16px;
+    overflow: hidden;
+}
+
+.table-top {
+    padding: 20px 24px;
+    border-bottom: 1px solid #263244;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.table-top h2 {
+    font-size: 18px;
+}
+
+.lead-count {
+    color: #94a3b8;
+    font-size: 13px;
+}
+
+.table-wrapper {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th {
+    text-align: left;
+    color: #64748b;
+    font-size: 12px;
+    text-transform: uppercase;
+    padding: 16px 20px;
+    background: #0f172a;
+}
+
+td {
+    padding: 17px 20px;
+    border-top: 1px solid #263244;
+    color: #cbd5e1;
+    font-size: 14px;
+}
+
+.name {
+    color: white;
+    font-weight: 600;
+}
+
+.email {
+    color: #94a3b8;
+}
+
+.status {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+.status-new {
+    background: #172554;
+    color: #60a5fa;
+}
+
+.status-contacted {
+    background: #422006;
+    color: #fbbf24;
+}
+
+.status-qualified {
+    background: #052e16;
+    color: #4ade80;
+}
+
+.actions {
+    display: flex;
+    gap: 7px;
+}
+
+.action-btn {
+    text-decoration: none;
+    padding: 7px 10px;
+    border-radius: 7px;
+    font-size: 12px;
+    border: 1px solid #334155;
+}
+
+.view-btn {
+    color: #38bdf8;
+}
+
+.edit-btn {
+    color: #fbbf24;
+}
+
+.delete-btn {
+    background: transparent;
+    color: #f87171;
+    cursor: pointer;
+}
+
+.action-btn:hover {
+    border-color: #38bdf8;
+}
+
+.empty-state {
+    text-align: center;
+    padding: 70px 20px;
+}
+
+.empty-icon {
+    font-size: 45px;
+    margin-bottom: 15px;
+}
+
+.empty-state h3 {
+    margin-bottom: 8px;
+}
+
+.empty-state p {
+    color: #64748b;
+    margin-bottom: 20px;
+}
+
+@media (max-width: 700px) {
+
+    .leads-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .add-btn {
+        width: 100%;
+        text-align: center;
+    }
+
+}
+
+</style>
+
+
+<div class="leads-page">
+
+    <div class="leads-header">
+
+        <div>
+            <div class="badge">
+                CUSTOMER MANAGEMENT
+            </div>
+
+            <h1>Leads</h1>
+
+            <p>
+                Manage, view and organize your customer leads.
+            </p>
+        </div>
+
+        <a href="{% url 'add_lead' %}" class="add-btn">
+            + Add New Lead
+        </a>
+
+    </div>
+
+
+    <div class="leads-card">
+
+        <div class="table-top">
+
+            <h2>All Leads</h2>
+
+            <span class="lead-count">
+                {{ leads|length }} lead{{ leads|length|pluralize }}
+            </span>
+
+        </div>
+
+
+        {% if leads %}
+
+        <div class="table-wrapper">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Interest</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+
+                </thead>
+
+
+                <tbody>
+
+                    {% for lead in leads %}
+
+                    <tr>
+
+                        <td class="name">
+                            {{ lead.name }}
+                        </td>
+
+                        <td class="email">
+                            {{ lead.email }}
+                        </td>
+
+                        <td>
+                            {{ lead.interest }}
+                        </td>
+
+                        <td>
+
+                            {% if lead.status == "New" %}
+
+                                <span class="status status-new">
+                                    New
+                                </span>
+
+                            {% elif lead.status == "Contacted" %}
+
+                                <span class="status status-contacted">
+                                    Contacted
+                                </span>
+
+                            {% else %}
+
+                                <span class="status status-qualified">
+                                    Qualified
+                                </span>
+
+                            {% endif %}
+
+                        </td>
+
+                        <td>
+
+                            <div class="actions">
+
+                                <a
+                                    href="{% url 'view_lead' lead.id %}"
+                                    class="action-btn view-btn"
+                                >
+                                    View
+                                </a>
+
+                                <a
+                                    href="{% url 'edit_lead' lead.id %}"
+                                    class="action-btn edit-btn"
+                                >
+                                    Edit
+                                </a>
+
+                                <form
+                                    method="POST"
+                                    action="{% url 'delete_lead' lead.id %}"
+                                    onsubmit="return confirm('Are you sure you want to delete this lead?');"
+                                >
+
+                                    {% csrf_token %}
+
+                                    <button
+                                        type="submit"
+                                        class="action-btn delete-btn"
+                                    >
+                                        Delete
+                                    </button>
+
+                                </form>
+
+                            </div>
+
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+        {% else %}
+
+        <div class="empty-state">
+
+            <div class="empty-icon">
+                👥
+            </div>
+
+            <h3>No Leads Yet</h3>
+
+            <p>
+                Start by adding your first customer lead.
+            </p>
+
+            <a href="{% url 'add_lead' %}" class="add-btn">
+                + Add New Lead
+            </a>
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+</div>
+
+{% endblock %}

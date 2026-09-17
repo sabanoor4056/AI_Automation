@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+```
+<title>Dashboard | AI Automation</title>
+
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, sans-serif;
+    }
+
+    body {
+        background: #0b1120;
+        color: #ffffff;
+        min-height: 100vh;
+    }
+
+    .navbar {
+        min-height: 70px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 14px 50px;
+        background: #111827;
+        border-bottom: 1px solid #263244;
+        gap: 20px;
+    }
+
+    .logo {
+        font-size: 22px;
+        font-weight: bold;
+        white-space: nowrap;
+    }
+
+    .logo span {
+        color: #38bdf8;
+    }
+
+    .nav-links {
+        display: flex;
+        gap: 20px;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+    }
+
+    .nav-links a {
+        color: #cbd5e1;
+        text-decoration: none;
+        font-size: 14px;
+        transition: 0.2s;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+        color: #38bdf8;
+    }
+
+    .container {
+        max-width: 1200px;
+        margin: 45px auto;
+        padding: 0 25px;
+    }
+
+    .welcome {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 20px;
+        margin-bottom: 30px;
+    }
+
+    .welcome h1 {
+        font-size: 34px;
+        margin-bottom: 8px;
+    }
+
+    .welcome p {
+        color: #94a3b8;
+    }
+
+    .profile-btn {
+        background: #111827;
+        border: 1px solid #263244;
+        color: #cbd5e1;
+        padding: 11px 18px;
+        border-radius: 10px;
+        text-decoration: none;
+        font-size: 14px;
+        transition: 0.2s;
+    }
+
+    .profile-btn:hover {
+        border-color: #38bdf8;
+        color: #38bdf8;
+    }
+
+    .stats {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 18px;
+    }
+
+    .stat-card {
+        background: #111827;
+        border: 1px solid #263244;
+        border-radius: 15px;
+        padding: 22px;
+        transition: 0.2s;
+    }
+
+    .stat-card:hover {
+        transform: translateY(-3px);
+        border-color: #38bdf8;
+    }
+
+    .stat-card p {
+        color: #94a3b8;
+        font-size: 14px;
+        margin-bottom: 12px;
+    }
+
+    .stat-card h2 {
+        font-size: 29px;
+    }
+
+    .stat-change {
+        color: #38bdf8;
+        font-size: 12px;
+        margin-top: 8px;
+    }
+
+    .content-grid {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        gap: 20px;
+        margin-top: 25px;
+    }
+
+    .card {
+        background: #111827;
+        border: 1px solid #263244;
+        border-radius: 16px;
+        padding: 25px;
+    }
+
+    .card h2 {
+        font-size: 19px;
+        margin-bottom: 20px;
+    }
+
+    .section-heading {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+    .section-heading h2 {
+        margin-bottom: 0;
+    }
+
+    .view-link {
+        color: #38bdf8;
+        text-decoration: none;
+        font-size: 13px;
+    }
+
+    .view-link:hover {
+        text-decoration: underline;
+    }
+
+    .chart {
+        height: 230px;
+        display: flex;
+        align-items: flex-end;
+        gap: 18px;
+        padding: 20px 10px 5px;
+        border-bottom: 1px solid #334155;
+    }
+
+    .bar {
+        flex: 1;
+        background: #38bdf8;
+        border-radius: 7px 7px 0 0;
+        min-height: 35px;
+        opacity: 0.8;
+        transition: 0.3s;
+    }
+
+    .bar:hover {
+        opacity: 1;
+        transform: scaleY(1.03);
+    }
+
+    .activity {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .activity-item {
+        padding: 13px;
+        background: #0f172a;
+        border-radius: 10px;
+        color: #cbd5e1;
+        font-size: 14px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .activity-item span {
+        color: #38bdf8;
+    }
+
+    .quick-actions {
+        margin-top: 25px;
+    }
+
+    .action-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 15px;
+    }
+
+    .action {
+        padding: 20px;
+        background: #0f172a;
+        border: 1px solid #263244;
+        border-radius: 12px;
+        text-decoration: none;
+        color: white;
+        transition: 0.2s;
+        display: block;
+    }
+
+    .action:hover {
+        border-color: #38bdf8;
+        transform: translateY(-3px);
+    }
+
+    .action h3 {
+        margin-bottom: 7px;
+        font-size: 16px;
+    }
+
+    .action p {
+        color: #94a3b8;
+        font-size: 13px;
+    }
+
+    .bottom-actions {
+        margin-top: 25px;
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+    }
+
+    .btn {
+        padding: 11px 18px;
+        border-radius: 9px;
+        text-decoration: none;
+        font-size: 13px;
+        border: 1px solid #263244;
+        color: #cbd5e1;
+        background: #111827;
+        transition: 0.2s;
+    }
+
+    .btn:hover {
+        border-color: #38bdf8;
+        color: #38bdf8;
+    }
+
+    .primary-btn {
+        background: #0284c7;
+        border-color: #0284c7;
+        color: white;
+    }
+
+    .primary-btn:hover {
+        background: #0369a1;
+        color: white;
+    }
+
+    @media (max-width: 1000px) {
+        .navbar {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .nav-links {
+            justify-content: flex-start;
+        }
+
+        .stats {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .content-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    @media (max-width: 600px) {
+        .navbar {
+            padding: 15px 20px;
+        }
+
+        .container {
+            margin-top: 30px;
+            padding: 0 18px;
+        }
+
+        .nav-links {
+            gap: 12px;
+        }
+
+        .stats,
+        .action-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .welcome {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .chart {
+            gap: 8px;
+        }
+    }
+</style>
+```
+
+</head>
+
+<body>
+
+```
+<nav class="navbar">
+
+    <div class="logo">
+        AI<span>Automation</span>
+    </div>
+
+    <div class="nav-links">
+
+        <a href="/">
+            Home
+        </a>
+
+        <a href="/dashboard/" class="active">
+            Dashboard
+        </a>
+
+        <a href="/chatboard/">
+            Chatboard
+        </a>
+
+        <a href="/leads/">
+            Customers
+        </a>
+
+        <a href="/automations/">
+            Automations
+        </a>
+
+        <a href="/analytics/">
+            Analytics
+        </a>
+
+        <a href="/projects/">
+            Projects
+        </a>
+
+        <a href="/settings/">
+            Settings
+        </a>
+
+    </div>
+
+</nav>
+
+
+<main class="container">
+
+    <div class="welcome">
+
+        <div>
+            <h1>Dashboard</h1>
+
+            <p>
+                Monitor your AI automation platform and customer activity.
+            </p>
+        </div>
+
+        <a href="/settings/" class="profile-btn">
+            Saba Noor ⚙
+        </a>
+
+    </div>
+
+
+    <!-- STATISTICS -->
+
+    <div class="stats">
+
+        <div class="stat-card">
+            <p>Total Customers</p>
+            <h2>128</h2>
+            <div class="stat-change">+12% this month</div>
+        </div>
+
+        <div class="stat-card">
+            <p>Active Leads</p>
+            <h2>34</h2>
+            <div class="stat-change">+8 new leads</div>
+        </div>
+
+        <div class="stat-card">
+            <p>AI Tasks</p>
+            <h2>57</h2>
+            <div class="stat-change">+18% this week</div>
+        </div>
+
+        <div class="stat-card">
+            <p>Automations</p>
+            <h2>12</h2>
+            <div class="stat-change">+3 this month</div>
+        </div>
+
+    </div>
+
+
+    <!-- MAIN CONTENT -->
+
+    <div class="content-grid">
+
+        <!-- CUSTOMER ACTIVITY -->
+
+        <div class="card">
+
+            <div class="section-heading">
+
+                <h2>
+                    Customer Activity
+                </h2>
+
+                <a href="/analytics/" class="view-link">
+                    View Analytics →
+                </a>
+
+            </div>
+
+            <div class="chart">
+
+                <div class="bar" style="height:45%;" title="Monday"></div>
+                <div class="bar" style="height:65%;" title="Tuesday"></div>
+                <div class="bar" style="height:52%;" title="Wednesday"></div>
+                <div class="bar" style="height:80%;" title="Thursday"></div>
+                <div class="bar" style="height:70%;" title="Friday"></div>
+                <div class="bar" style="height:92%;" title="Saturday"></div>
+                <div class="bar" style="height:76%;" title="Sunday"></div>
+
+            </div>
+
+        </div>
+
+
+        <!-- RECENT ACTIVITY -->
+
+        <div class="card">
+
+            <div class="section-heading">
+
+                <h2>
+                    Recent Activity
+                </h2>
+
+                <a href="/leads/" class="view-link">
+                    View All →
+                </a>
+
+            </div>
+
+            <div class="activity">
+
+                <div class="activity-item">
+                    <span>✓</span>
+                    New customer added
+                </div>
+
+                <div class="activity-item">
+                    <span>✓</span>
+                    AI task completed
+                </div>
+
+                <div class="activity-item">
+                    <span>✓</span>
+                    Lead status updated
+                </div>
+
+                <div class="activity-item">
+                    <span>✓</span>
+                    Automation executed
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- QUICK ACTIONS -->
+
+    <div class="card quick-actions">
+
+        <h2>
+            Quick Actions
+        </h2>
+
+        <div class="action-grid">
+
+            <a href="/chatboard/" class="action">
+
+                <h3>🤖 AI Chatboard</h3>
+
+                <p>
+                    Start a conversation with your AI assistant.
+                </p>
+
+            </a>
+
+
+            <a href="/leads/" class="action">
+
+                <h3>👥 Customers</h3>
+
+                <p>
+                    Manage customers and leads.
+                </p>
+                <a href="{% url 'leads' %}">
+    Leads
+</a>
+
+            </a>
+
+
+            <a href="/automations/" class="action">
+
+                <h3>⚡ Automations</h3>
+
+                <p>
+                    Create and manage automated workflows.
+                </p>
+
+            </a>
+
+        </div>
+
+
+        <div class="bottom-actions">
+
+            <a href="/analytics/" class="btn primary-btn">
+                📈 Open Analytics
+            </a>
+
+            <a href="/projects/" class="btn">
+                📁 View Projects
+            </a>
+
+            <a href="/settings/" class="btn">
+                ⚙ Settings
+            </a>
+            <a href="{% url 'chatboard' %}">Try AI</a>
+            <button onclick="window.location.href='{% url 'chatboard' %}'">
+    Try AI
+</button>
+<button onclick="window.location.href='{% url 'create_automation' %}'">
+    Create Automation
+</button>
+
+
+        </div>
+        
+
+    </div>
+
+</main>
+```
+
+</body>
+
+</html>
